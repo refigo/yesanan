@@ -7,6 +7,8 @@ import { WinstonModule, utilities } from 'nest-winston';
 import * as winston from 'winston';
 import { ExceptionModule } from './common/filter/exception-filter.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './user/entity/user.entity';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -36,11 +38,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: process.env.DATABASE_NAME,
       synchronize: process.env.NODE_ENV !== 'production',
       entities: [
-        // User,
+        User,
       ],
       logging: process.env.NODE_ENV !== 'production',
     }),
     ExceptionModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
