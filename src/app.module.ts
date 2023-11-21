@@ -6,6 +6,7 @@ import { validate } from './common/env.validation';
 import { WinstonModule, utilities } from 'nest-winston';
 import * as winston from 'winston';
 import { ExceptionModule } from './common/filter/exception-filter.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -25,6 +26,19 @@ import { ExceptionModule } from './common/filter/exception-filter.module';
           ),
         }),
       ],
+    }),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DATABASE_HOST,
+      port: 5432,
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASS,
+      database: process.env.DATABASE_NAME,
+      synchronize: process.env.NODE_ENV !== 'production',
+      entities: [
+        // User,
+      ],
+      logging: process.env.NODE_ENV !== 'production',
     }),
     ExceptionModule,
   ],
