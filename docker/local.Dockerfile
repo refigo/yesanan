@@ -8,8 +8,6 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install application dependencies
-# RUN npm install -g @nestjs/cli
-# RUN npm install -g
 RUN npm ci
 
 # Copy the rest of the application source code

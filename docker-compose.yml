@@ -1,11 +1,26 @@
 version: '3.9'
 
-# volumes:
-#   mongodb: {}
+volumes:
+  postgres: {}
 
 services:
+  # database:
+  #   container_name: yesanan-postgres
+  #   image: postgres:14-alpine
+  #   restart: always
+  #   environment:
+  #     POSTGRES_DB: ${DATABASE_NAME}
+  #     POSTGRES_USER: ${DATABASE_USER}
+  #     POSTGRES_PASSWORD: ${DATABASE_PASS}
+  #   networks:
+  #     - mynetwork
+  #   ports:
+  #     - '5432:5432'
+  #   volumes:
+  #     - './postgres:/var/lib/postgresql/data'
+
   nest-app:
-    container_name: projects-NestJS
+    container_name: yesanan-nestjs
     build:
       context: .
       dockerfile: docker/local.Dockerfile
@@ -29,6 +44,8 @@ services:
       DATABASE_PASS: ${DATABASE_PASS}
       DATABASE_HOST: ${DATABASE_HOST}
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN}
 
 networks:
   mynetwork:
