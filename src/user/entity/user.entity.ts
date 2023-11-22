@@ -16,12 +16,6 @@ export interface UserCreateProps {
 export interface UserSignInProps
   extends Pick<UserCreateProps, 'name' | 'password'> {}
 
-export interface UserUpdateProps {
-  lat: number;
-  lon: number;
-  isRecommendateLunch: boolean;
-}
-
 @Entity('users')
 @Unique(['name'])
 export class User {
